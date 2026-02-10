@@ -1,10 +1,4 @@
-FROM amazoncorretto:17.0.18
-
-WORKDIR /app
-
-COPY . .
-
-RUN ./mvnw clean install
-
-CMD ["./mvnw", "spring-boot:run"]
-
+FROM eclipse-temurin:17
+ARG JAR_FILE=demo/target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
