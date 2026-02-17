@@ -9,9 +9,9 @@ export default function home() {
     async function sendGetCheck() {
         console.log("function call")
         try {
-            const res = await fetch("http://localhost8080/ping");
+            const res = await fetch("http://localhost:8080/ping");
             const data = await res.json();
-            console.log(data)
+            console.log(data);
         } catch (e) {
             console.log(e);
             console.log("Error during check");
