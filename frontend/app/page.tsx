@@ -1,24 +1,30 @@
 "use client";
 import Form from 'next/form'
 import hello from './hello/page';
+import { useRef, useState } from 'react';
 
 export default function home() {
-    function helloWorld() {
-        console.log("hello world")
-    }
+
     async function sendGetCheck() {
-        console.log("function call")
+
         try {
             const res = await fetch("http://localhost:8080/ping");
             const data = await res.json();
             console.log(data);
+            window.alert("Connection check successful")
         } catch (e) {
             console.log(e);
-            console.log("Error during check");
+            window.alert("Error during connection check")
         }
     }
     return (
         <form>
+
+            <dialog id="connectionCheckDialog">
+                <p>Connection check sucasdasdcessful</p>
+                <button>Close</button>
+            </dialog>
+
             <label>Username:</label>
             <input id="username" name="username"></input>
             <br></br>
