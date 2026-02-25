@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 
 export default function home() {
 
+    const url = "http://localhost:8080/login";
+
     async function sendGetCheck() {
 
         try {
@@ -17,11 +19,38 @@ export default function home() {
             window.alert("Error during connection check")
         }
     }
+
+    async function login(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        const username = formData.get("username");
+        const password = formData.get("password");
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "username": username,
+                    "password": password
+                })
+            })
+
+            console.log("POST request sent")
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     return (
-        <form>
+        <form onSubmit={login}>
 
             <dialog id="connectionCheckDialog">
-                <p>Connection check sucasdasdcessful</p>
+                <p>Connection check successful</p>
                 <button>Close</button>
             </dialog>
 
@@ -29,7 +58,7 @@ export default function home() {
             <input id="username" name="username"></input>
             <br></br>
             <label>Password:</label>
-            <input id="password" name="password"></input>
+            <input id="password" name="password" type='password'></input>
 
             <br></br>
 
